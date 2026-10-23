@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.superpowers/
+.taste-skill/
+.impeccable/mocks/
+.impeccable/review/
+.impeccable/.cache/
+.impeccable/questions/
+*.log
+.DS_Store
+.env
+.env.local
