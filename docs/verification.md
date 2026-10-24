@@ -52,4 +52,4 @@ This verification concerns the frontend's simulated behaviour. It does not test 
 
 The reviewer initially required corrections for the desktop house framing, fallback overlay overlap, and a redundant scenario eyebrow. After repair and valid viewport recaptures, the reviewer scored all three original fixes **resolved**, with disposition **ship** for that fix list and no regressions observed in the scored changes. External QUALITY BAR/image-comp comparison was not scored because none was selected. This is a scoped review result, not a claim of a full external-gallery certification.
 
-The final code and documentation are saved in the local Git repository. Nothing was pushed or deployed.
+The implementation was initially verified and saved locally. Repository publication is a separate user-requested step; see README for the repository and CI details. No website deployment is part of this build.

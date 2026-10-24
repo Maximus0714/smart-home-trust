@@ -1,17 +1,52 @@
 # Smart Home Trust
 
+[![CI](https://github.com/Maximus0714/smart-home-trust/actions/workflows/ci.yml/badge.svg)](https://github.com/Maximus0714/smart-home-trust/actions/workflows/ci.yml)
+
 A local frontend demonstration of three separate trust decisions in a smart home: **ALIBI** checks device claims, **Ghost Access** checks control paths, and **Habit Guard** checks whose activity may teach routines.
+
+![Smart Home Trust overview with furnished interactive house and selectable device pins](docs/images/overview.png)
+
+## Project status
+
+Working frontend prototype for a software-only smart-home security demonstration. All devices, access decisions, credentials, and witness readings are simulated in the browser. No real devices are connected.
+
+| Area | Implemented |
+| --- | --- |
+| Interactive home | Furnished procedural 3D house, room focus, orbit/zoom, removable roof, animated door/bolt/light, accessible icon pins and device inspector. |
+| ALIBI | Command-bound witness qualification, supported/contradicted/insufficient verdicts, replay/delay/missing-evidence scenarios, expiry, and evidence history. |
+| Ghost Access | One seeded guest and integration, independent access paths, direct/full removal, credential rotation, and allowed/denied light requests. |
+| Habit Guard | Seven-day pattern comparison, source-based teaching eligibility, proposal provenance, approval and daily scheduling, isolated baseline light. |
+| Demo Lab | Eight repeatable scenarios, editable simulator inputs, time controls, and reset. |
+| Browser support | Local persistence, responsive desktop/phone layouts, reduced motion, keyboard controls, and a usable home-plan alternative if WebGL fails. |
+
+**Planned, not implemented:** multiple named guests/integrations, add/re-add controls, configurable per-device/action grants, and constrained delegation. The proposed [access-lifecycle design](docs/superpowers/specs/2026-10-24-access-lifecycle-design.md) records those decisions; it is not a description of current functionality.
 
 ## Run
 
 Node.js 22.12 or newer is required; this project was verified with Node.js 24.
 
 ```powershell
-npm install
+git clone https://github.com/Maximus0714/smart-home-trust.git
+cd smart-home-trust
+npm ci
 npm run dev
 ```
 
 Open the local address printed by Vite, normally [http://127.0.0.1:5173](http://127.0.0.1:5173).
+
+Repository access is required while the repository is private. After the initial dependency installation, the app needs no API keys, environment variables, account login, or external device service. Node.js 24 is selected in `.nvmrc` and in CI.
+
+## Stack and checks
+
+React 19, TypeScript, Vite 8, Three.js, React Three Fiber 9, drei 10, lucide-react, locally served Fontsource fonts, and Vitest. Dependency versions are locked in `package-lock.json`.
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the local development server. |
+| `npm run typecheck` | Run strict TypeScript checks. |
+| `npm test` | Run the focused simulation and persistence tests. |
+| `npm run build` | Type-check and produce `dist/`. |
+| `npm run preview` | Serve the production build locally. |
 
 ```powershell
 npm run typecheck
@@ -21,6 +56,18 @@ npm run preview
 ```
 
 The production build is written to `dist/`. The preview command serves that build locally, normally on port 4173. No hosting account or external service is required.
+
+GitHub Actions runs the type checks, tests, and production build on pushes to `main` and on pull requests. It does not deploy the website.
+
+## Five-minute demo
+
+1. On Overview, select an icon pin, inspect a device, move the door or toggle the light, and explore the rooms.
+2. In Demo Lab, run **A false lock report**, then advance **+3 seconds**. Inspect ALIBI's contradiction and evidence; an unavailable witness instead produces insufficient evidence.
+3. Run **The remaining access path**. In Ghost Access, remove the direct guest grant, test the integration, remove the guest completely, then test the integration and owner again.
+4. Run **Who teaches the routine?**. In Habit Guard, compare the 02:00 integration proposal with the retained 19:00 owner pattern. Change teaching eligibility and inspect the source counts.
+5. Approve a routine and advance the clock. The approval-only baseline operates a sandbox light; Habit Guard operates the main house. Reset when ready for a new run.
+
+Each preset replaces the current local run. Pause the clock if you want to inspect the five-second current-verdict badge before it expires.
 
 ## Explore
 
@@ -65,6 +112,16 @@ Keyboard-accessible DOM controls cover all device actions. A labelled home-plan 
 - `docs/superpowers/`: approved design and implementation plan.
 - `docs/verification.md`: validation evidence and limitations.
 
+The React views dispatch into the shared simulation reducer. The scene reads physical state, while evidence, access, learning, and the shared timeline are derived from their own records. The pure verifier consumes qualified messages, and the scene never directly assigns a verification verdict. See the [original concept](plan.md), [implemented design](docs/superpowers/specs/2026-10-24-smart-home-trust-design.md), and [design system](DESIGN.md).
+
 The `.superpowers/` directory contains throwaway design mockups and is ignored by Git. It is not required to run the app.
 
 IBM Plex Sans and Libre Baskerville are provided by Fontsource under their supplied open font licenses. Copies are included in `public/licenses/` and in the production build.
+
+## Contributing and reporting problems
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the development workflow and [SECURITY.md](SECURITY.md) for reporting guidance. Use the repository's bug-report template for reproducible UI or simulation problems.
+
+## License
+
+No open-source license has been selected for the project source; rights remain reserved by the respective copyright holders. Bundled third-party dependencies and fonts retain their own licenses. Do not interpret the font-license files as a license for the application source.
