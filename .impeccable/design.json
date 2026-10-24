@@ -338,6 +338,11 @@
         "name": "reduced-motion-transition",
         "value": ".01ms",
         "purpose": "CSS reduced-motion override; smooth scrolling is disabled."
+      },
+      {
+        "name": "device-pin-selection",
+        "value": "200ms cubic-bezier(.16,1,.3,1)",
+        "purpose": "One selection expansion ending in a static ring; disabled by reduced motion."
       }
     ],
     "breakpoints": [
@@ -451,6 +456,13 @@
       "description": "Flat module name and written state link; source src/views/Overview.tsx.",
       "html": "<button class=\"ds-trust\" type=\"button\"><strong>ALIBI</strong><span><i aria-hidden=\"true\"></i>Supported</span><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M5 12h14m-7-7 7 7-7 7\"/></svg></button>",
       "css": ".ds-trust { width:100%; display:grid; grid-template-columns:125px minmax(0,1fr) 17px; gap:12px; align-items:center; padding:11px 0; border:0; background:var(--surface,#fff); text-align:left; color:var(--ink,#1a2c31); font:13px \"IBM Plex Sans\",sans-serif; cursor:pointer; transition:background-color 160ms ease; } .ds-trust strong { font-weight:500; } .ds-trust span { display:flex; align-items:center; gap:9px; line-height:1.5; color:var(--muted,#5d6b70); } .ds-trust i { width:6px; height:6px; background:var(--positive,#35715c); border-radius:50%; } .ds-trust svg { color:#70878e; } .ds-trust:hover { background:#f7f9f9; } .ds-trust:focus-visible { outline:3px solid #498896; outline-offset:4px; } @media(max-width:740px) { .ds-trust { grid-template-columns:89px minmax(0,1fr) 14px; gap:8px; padding:12px 0; } }"
+    },
+    {
+      "name": "Device icon pin",
+      "kind": "button",
+      "description": "Camera-facing native 44px device selector with a 34px icon face; selected ring and separate serif-italic label.",
+      "html": "<button class=\"ds-device-pin\" type=\"button\" aria-label=\"Select front door\" aria-pressed=\"true\"><span class=\"ds-device-face\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" aria-hidden=\"true\"><rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V6a4 4 0 0 1 8 0v4m-4 5v2\"/></svg></span></button>",
+      "css": ".ds-device-pin{width:44px;height:44px;border:0;border-radius:50%;display:grid;place-items:center;background:transparent;cursor:pointer}.ds-device-face{display:grid;place-items:center;width:34px;height:34px;border:2px solid white;border-radius:50%;background:#226b76;color:white;outline:2px solid #226b76}.ds-device-pin:hover .ds-device-face{background:#20363b}.ds-device-pin:focus-visible{outline:3px solid #1a2c31;outline-offset:2px}"
     }
   ],
   "narrative": {

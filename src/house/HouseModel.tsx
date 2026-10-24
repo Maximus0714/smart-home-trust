@@ -128,13 +128,11 @@ function Bedroom() {
   </group>;
 }
 function DeviceTarget({ id, at, selected, onSelect, children }: { id: DeviceId; at: Point; selected: DeviceId; onSelect: (id: DeviceId) => void; children?: ReactNode; label: string }) {
-  const active = selected === id;
-  return <group position={at}>
+  return <group position={at} name={`device-anchor-${id}`} userData={{ selected: selected === id }}>
     {children}
     <mesh onClick={e => { e.stopPropagation(); onSelect(id); }} onPointerOver={e => { e.stopPropagation(); document.body.style.cursor = 'pointer'; }} onPointerOut={() => { document.body.style.cursor = ''; }}>
       <sphereGeometry args={[0.25, 12, 8]} /><meshBasicMaterial transparent opacity={0} depthWrite={false} />
     </mesh>
-    <mesh position={[0, 0, 0.09]}><sphereGeometry args={[active ? 0.075 : 0.045, 16, 10]} /><meshStandardMaterial color={active ? '#2c7668' : '#f5f2e9'} emissive={active ? '#2c7668' : '#55665c'} emissiveIntensity={0.3} /></mesh>
   </group>;
 }
 function Entry(props: HouseSceneProps) {

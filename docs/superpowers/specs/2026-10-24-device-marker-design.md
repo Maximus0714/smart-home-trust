@@ -1,6 +1,6 @@
 # Clear device-selection markers
 
-Status: proposed for approval. Small visual and interaction refinement to the existing house viewer.
+Status: approved by the user on 24 October 2026; implemented with browser verification. Small visual and interaction refinement to the existing house viewer.
 
 ## Intent
 

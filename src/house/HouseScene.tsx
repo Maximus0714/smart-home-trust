@@ -4,6 +4,7 @@ import { OrbitControls } from '@react-three/drei';
 import { Box3, MathUtils, OrthographicCamera, PCFShadowMap, Vector3 } from 'three';
 import type { OrbitControls as Controls } from 'three-stdlib';
 import HouseModel from './HouseModel';
+import { DeviceMarkers, MarkerProjection, type MarkerElements } from './DeviceMarkers';
 import type { HouseSceneProps, RoomId } from './types';
 
 const overview = new Box3(new Vector3(-5.65, -0.4, -4.1), new Vector3(5.65, 3.15, 4.65));
@@ -132,6 +133,12 @@ function SceneUnavailable() {
 }
 export default function HouseScene(props: HouseSceneProps) {
   const wrapper = useRef<HTMLDivElement>(null);
+  const markers = useRef<MarkerElements>({
+    lock: { button: null, line: null, dot: null, labelLine: null },
+    'bolt-witness': { button: null, line: null, dot: null, labelLine: null },
+    'door-contact': { button: null, line: null, dot: null, labelLine: null },
+    light: { button: null, line: null, dot: null, labelLine: null },
+  });
   const [active, setActive] = useState(true);
   const contextCleanup = useRef<(() => void) | null>(null);
   const errorCallback = useRef(props.onError);
@@ -167,9 +174,11 @@ export default function HouseScene(props: HouseSceneProps) {
         <HouseModel {...props} />
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.345, 0]} receiveShadow><planeGeometry args={[200, 200]} /><shadowMaterial transparent opacity={0.13} /></mesh>
         <CameraRig room={props.room} viewCommand={props.viewCommand} reducedMotion={props.reducedMotion} />
+        <MarkerProjection elements={markers} selectedDevice={props.selectedDevice} />
         <Ready onReady={props.onReady} />
       </Canvas>
     </SceneBoundary>
+    <DeviceMarkers elements={markers} selectedDevice={props.selectedDevice} onSelectDevice={props.onSelectDevice} reducedMotion={props.reducedMotion} />
   </div>;
 }
 

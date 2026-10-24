@@ -255,6 +255,8 @@ A soft neutral tray groups four plain buttons. The pressed room is a white inset
 
 The home is the signature useful object. View controls occupy the upper right, room/device metadata uses opaque warm backing, and the roof action sits in the footer. Selection updates the compact device dock; the explicit Inspect device action reveals the panel and close returns focus. Accessible DOM selection and the fallback home plan remain available independently of WebGL.
 
+Device locations use 34px camera-facing icon pins in 44px native button targets. All four remain visible, with solid leaders to their physical anchors and screen spacing for the entry cluster. The selected pin uses muted teal, a white inner border, a teal outer ring, and a 12px serif-italic name callout. Callout placement avoids the icon targets; a dashed selected-only connector links displaced labels to their pin. Selection scales the face briefly over 200ms, then stays static; reduced motion skips it. Empty overlay space remains transparent to orbit gestures. Projection follows existing demand-rendered frames and animated device anchors, without an extra render loop. See [DeviceMarkers.tsx](src/house/DeviceMarkers.tsx) and [device-markers.css](src/house/device-markers.css).
+
 Trust summaries are flat, three-part rows: module name, written state plus dot, and arrow. Their hover fill is subtle, dividers are fine, and their names remain readable on phones. Recent activity is an initially collapsed native disclosure. These patterns are evidenced by [src/views/Overview.tsx](src/views/Overview.tsx), not a new arrangement proposal.
 
 ## Do's and Don'ts

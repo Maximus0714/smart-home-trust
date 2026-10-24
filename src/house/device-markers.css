@@ -1,0 +1,18 @@
+.device-markers { position: absolute; inset: 0; z-index: 3; pointer-events: none; overflow: hidden; }
+.device-marker-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.device-marker-lines line { stroke: var(--muted); stroke-width: 1; stroke-opacity: .65; }
+.device-marker-lines circle { fill: var(--accent); stroke: #fff; stroke-width: 1; }
+.device-marker-lines g[data-selected=true] line { stroke: #226b76; stroke-width: 1.5; stroke-opacity: .9; }
+.device-marker-lines g[data-selected=true] circle { fill: #226b76; }
+.device-marker-lines .device-label-connector { stroke-dasharray: 3 3; stroke-width: 1; stroke-opacity: .7; visibility: hidden; }
+.device-pin { position: absolute; left: 0; top: 0; width: 44px; height: 44px; display: grid; place-items: center; padding: 4px; margin: 0; border: 0; background: transparent; border-radius: 50%; pointer-events: auto; touch-action: manipulation; cursor: pointer; visibility: hidden; color: var(--accent); z-index: 1; }
+.device-pin-face { width: 34px; height: 34px; display: grid; place-items: center; background: #fff; border: 1.5px solid var(--muted); border-radius: 50%; box-shadow: 0 3px 8px rgb(26 44 49 / 12%); transition: background-color 160ms, border-color 160ms; }
+.device-pin:hover .device-pin-face { background: var(--ground); border-color: #226b76; }
+.device-pin[aria-pressed=true] { color: #fff; z-index: 2; }
+.device-pin[aria-pressed=true] .device-pin-face { background: #226b76; border: 2px solid #fff; outline: 2px solid #226b76; animation: device-pin-select 200ms cubic-bezier(.16,1,.3,1) both; }
+.device-pin:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.device-pin-label { position: absolute; display: flex; justify-content: center; align-items: center; height: 30px; padding: 0 8px; border-radius: 6px; background: #fff; color: var(--ink); border: 1px solid var(--line); box-shadow: 0 3px 8px rgb(26 44 49 / 8%); white-space: nowrap; font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 12px; font-weight: 400; line-height: 1.3; letter-spacing: 0; text-transform: none; pointer-events: none; }
+@keyframes device-pin-select { from { transform: scale(.82); } 65% { transform: scale(1.12); } to { transform: scale(1); } }
+.device-markers[data-reduced-motion=true] .device-pin-face { animation: none; transition: none; }
+@media (prefers-reduced-motion: reduce) { .device-pin-face { animation: none !important; transition: none; } }
+
